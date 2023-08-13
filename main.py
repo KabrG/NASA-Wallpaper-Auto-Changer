@@ -47,12 +47,9 @@ def change_wallpaper():
     download_image(image_url, image_path1)
     download_image(image_url, image_path2)
     print("Complete")
-    # Saves it as wallpaper
+    # ASaves it as wallpaper
     # time.sleep(2)
     # apple_script(image_path)
 
 change_wallpaper()
 
-
-# /Users/kabirguron/Documents/nasa_api
-# print(pprint.pprint(r_json))
