@@ -37,9 +37,8 @@ def apple_script(image_path):
 
 def change_wallpaper():
     # os.path.join(os.path.expanduser("~") gets the user path
-    image_path1 = os.path.join(os.path.expanduser("~"), "Desktop", "nasa_api", "nasa_wallpapers", "nasa_image_of_the_day1.jpeg")
-    image_path2 = os.path.join(os.path.expanduser("~"), "Desktop", "nasa_api", "nasa_wallpapers", "nasa_image_of_the_day2.jpeg")
-
+    image_path1 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer", "nasa_wallpapers", "nasa_image_of_the_day1.jpeg")
+    image_path2 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer", "nasa_wallpapers", "nasa_image_of_the_day2.jpeg")
     # Grabs image of the day url
     image_url = get_nasa_image()
     # image_url = "https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg"
