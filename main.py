@@ -13,7 +13,7 @@ def get_nasa_image():
 
     r = requests.get("https://api.nasa.gov/planetary/apod", params=params)
     r_json = r.json()
-    # print(pprint.pprint(r_json))
+    # print(pprint.pprint(r_json)) # Uncomment code for visibility of JSON
     image_url = r_json['url']
     return image_url
 
@@ -41,14 +41,15 @@ def change_wallpaper():
     image_path2 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer", "nasa_wallpapers", "nasa_image_of_the_day2.jpeg")
     # Grabs image of the day url
     image_url = get_nasa_image()
+    # Sample Pizza URL (Testing Purposes)
     # image_url = "https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg"
     # Downloads it
     time.sleep(2)
     download_image(image_url, image_path1)
     download_image(image_url, image_path2)
     print("Complete")
-    # ASaves it as wallpaper
-    # time.sleep(2)
+    # ALTERNATIVE METHOD: APPLE SCRIPT
+    # Saves it as wallpaper
     # apple_script(image_path)
 
 change_wallpaper()
