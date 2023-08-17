@@ -2,6 +2,9 @@
  
 ## Description
 NASA posts a daily astronomy photo of the day. The goal for this project was to automate changing my desktop wallpaper background daily while posting the explanation on a Tkinter window for display. I used python to change the wallpaper itself and CronJob to schedule the execution daily.For this project, my MacOS wallpaper refreshes at 00:10 
+
+<img width="1439" alt="Screen Shot 2023-08-16 at 21 37 54" src="https://github.com/KabrG/NASA-Wallpaper-Auto-Changer/assets/130770806/4a876d8b-5e59-49d1-a50a-a9d27edfb009">
+
 ## Installation 
 The project runs on Python3. Ensure that the module Tkinter is imported correctly with any virtual enviroments set appropiately. 
 ## Operation
