@@ -8,15 +8,13 @@ import os
 # Export the DISPLAY environment variable
 os.environ['DISPLAY'] = ':0.0'
 
-
 # IMPORTANT NOTE. Allow cron jobs to have full disk access: https://www.bejarano.io/fixing-cron-jobs-in-mojave/
 # Add the directory containing the 'requests' module to sys.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import requests
 import subprocess
-# import pprint
-# import json
+# import pprint # Displaying Purposes
 
 def get_nasa_image():
     api_key = get_nasa_api_key()
@@ -46,7 +44,7 @@ def apple_script(image_path):
         subprocess.run(command, shell=True, check=True)
     except Exception as error:
         print(error)
-    print("Reached")
+    print("Wallpaper added (Apple Script)")
 
 def change_wallpaper():
     # os.path.join(os.path.expanduser("~") gets the user path
@@ -57,7 +55,7 @@ def change_wallpaper():
 
     print("Url grabbed")
     # Sample Pizza URL (Testing Purposes)
-    image_url = "https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg"
+    # image_url = "https://www.allrecipes.com/thmb/0xH8n2D4cC97t7mcC7eT2SDZ0aE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/6776_Pizza-Dough_ddmfs_2x1_1725-fdaa76496da045b3bdaadcec6d4c5398.jpg"
     # Downloads it
     time.sleep(2)
     try:
@@ -65,11 +63,9 @@ def change_wallpaper():
         delete_file(image_path2)
     except Exception as error:
         print("A error has occurred: ", error)
-    time.sleep(2)
     download_image(image_url, image_path1)
-    time.sleep(1)
     download_image(image_url, image_path2)
-    print("Complete")
+    print("Wallpaper Added")
     # ALTERNATIVE METHOD: APPLE SCRIPT
     # Saves it as wallpaper
     # apple_script(image_path)
@@ -80,7 +76,7 @@ def delete_file(path):
 def get_message():
     api_key = get_nasa_api_key()
     params = {"api_key": api_key}
-    print("Trying to get explanation")
+    print("Retrieving explanation")
     r = requests.get("https://api.nasa.gov/planetary/apod", params=params)
     r_json = r.json()
     # print(pprint.pprint(r_json)) # Uncomment code for visibility of JSON
@@ -102,18 +98,20 @@ def display_message():
     win.config(bg="black")  # specify background color
     win.geometry(f"{win_height}x{win_width}+0+250")  # Where window will open: geometry(width x height + position_right + position_down)
 
-    fact_widget = tk.Label(win, text=f"Message of the Day\n{message}",
-                           font=("Courier", 14), fg="white", bg="black",  # Switch around afterwards
-                           wraplength=win_width,
-                           anchor="w"
-                           )
+    # Title label
+    title_label = tk.Label(win, text="Message of the Day",
+                           font=("Courier", 16), fg="white", bg="black")
+    title_label.pack()
 
-    # Place the label widget at the center
-    fact_widget.place(relx=0.5, rely=0.5, anchor="center")
-    #
+    # Message label
+    fact_widget = tk.Label(win, text=message,
+                           font=("Courier", 14, "italic"), fg="white", bg="black", wraplength=win_width,
+                           anchor="w", justify="left")
+
+    fact_widget.pack(padx=20, pady=10, anchor="w")
+    # Destroys window before next session
     win.after(1000*destroy_after_seconds, lambda: win.destroy())
     win.mainloop()
-
 
 change_wallpaper()
 display_message()
