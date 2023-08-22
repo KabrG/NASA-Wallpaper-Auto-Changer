@@ -5,6 +5,9 @@ from nasa_api_key import get_nasa_api_key
 import sys
 import os
 
+import requests
+import subprocess
+
 # Export the DISPLAY environment variable
 os.environ['DISPLAY'] = ':0.0'
 
@@ -12,8 +15,7 @@ os.environ['DISPLAY'] = ':0.0'
 # Add the directory containing the 'requests' module to sys.path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-import requests
-import subprocess
+
 # import pprint # Displaying Purposes
 
 def get_nasa_image():
@@ -48,8 +50,10 @@ def apple_script(image_path):
 
 def change_wallpaper():
     # os.path.join(os.path.expanduser("~") gets the user path
-    image_path1 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer", "nasa_wallpapers", "nasa_image_of_the_day1.jpeg")
-    image_path2 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer", "nasa_wallpapers", "nasa_image_of_the_day2.jpeg")
+    image_path1 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer",
+                               "nasa_api_wallpapers", "nasa_image_of_the_day1.jpeg")
+    image_path2 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer",
+                               "nasa_api_wallpapers", "nasa_image_of_the_day2.jpeg")
     # Grabs image of the day url
     image_url = get_nasa_image()
 
@@ -88,15 +92,15 @@ def display_message():
     message = get_message()
     print(message)
     destroy_after_seconds = (24*60*60-30)
-    win_height = 400
-    win_width = 350
+    win_height = 550
+    win_width = 325
     win = tk.Tk()
 
     win.title("NASA Explanation: " + str(date.today()))  # title of the GUI window
-    win.maxsize(win_height, win_width)  # maxsize of window (length, height)
-    win.minsize(win_height, win_width)  # minsize of window (length, height)
+    win.maxsize(win_width, win_height)  # maxsize of window (length, height)
+    win.minsize(win_width, win_height)  # minsize of window (length, height)
     win.config(bg="black")  # specify background color
-    win.geometry(f"{win_height}x{win_width}+0+250")  # Where window will open: geometry(width x height + position_right + position_down)
+    win.geometry(f"{win_width}x{win_height}+0+225")  # Where window will open: geometry(width x height + position_right + position_down)
 
     # Title label
     title_label = tk.Label(win, text="Message of the Day",
@@ -105,7 +109,7 @@ def display_message():
 
     # Message label
     fact_widget = tk.Label(win, text=message,
-                           font=("Courier", 14, "italic"), fg="white", bg="black", wraplength=win_width,
+                           font=("Courier", 14, "italic"), fg="white", bg="black", wraplength=win_width-41,
                            anchor="w", justify="left")
 
     fact_widget.pack(padx=20, pady=10, anchor="w")
