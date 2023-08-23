@@ -1,4 +1,5 @@
 import time
+import datetime
 from datetime import date
 import tkinter as tk
 from nasa_api_key import get_nasa_api_key
@@ -50,10 +51,14 @@ def apple_script(image_path):
 
 def change_wallpaper():
     # os.path.join(os.path.expanduser("~") gets the user path
-    image_path1 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer",
-                               "nasa_api_wallpapers", "nasa_image_of_the_day1.jpeg")
-    image_path2 = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer",
-                               "nasa_api_wallpapers", "nasa_image_of_the_day2.jpeg")
+    date_time = str(datetime.datetime.now())
+    # wallpaper_directory = os.path.join(os.path.expanduser("~"), "Documents", "NASA-Wallpaper-Auto-Changer",
+    #                            "nasa_api_wallpapers")
+    directory_path = os.path.join(os.path.expanduser("~"), "Documents",
+                                  "NASA-Wallpaper-Auto-Changer", "nasa_api_wallpapers1")
+    image_path1 = os.path.join(directory_path, f"nasa_image_of_the_day_{date_time}_1.jpeg")
+    image_path2 = os.path.join(directory_path, f"nasa_image_of_the_day_{date_time}_2.jpeg")
+
     # Grabs image of the day url
     image_url = get_nasa_image()
 
@@ -63,8 +68,7 @@ def change_wallpaper():
     # Downloads it
     time.sleep(2)
     try:
-        delete_file(image_path1)
-        delete_file(image_path2)
+        delete_files_in_directory(directory_path)
     except Exception as error:
         print("A error has occurred: ", error)
     download_image(image_url, image_path1)
@@ -74,8 +78,17 @@ def change_wallpaper():
     # Saves it as wallpaper
     # apple_script(image_path)
 
-def delete_file(path):
-    os.remove(path)
+def delete_files_in_directory(directory_path):
+   try:
+     files = os.listdir(directory_path) # Gets all files in listed directory
+     for file in files:
+       file_path = os.path.join(directory_path, file) # Gets an individual file
+       if os.path.isfile(file_path): # Checks if it's a file
+         os.remove(file_path) # Removes file
+     print("All files deleted successfully.")
+   except OSError:
+     print("Error occurred while deleting files.")
+
 
 def get_message():
     api_key = get_nasa_api_key()
