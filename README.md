@@ -18,4 +18,4 @@ The project can be divided into the following procedures:
   
 ** I came across a glitch where MacOS will refuse to cycle through a single image in a folder. Importing two images worked well instead. 
 ### CronJob 
-10 0 * * * ~/Documents/NASA-Wallpaper-Auto-Changer/bin/python3.9 ~/Documents/NASA-Wallpaper-Auto-Changer/main.py >> ~/Documents/NASA-Wallpaper-Auto-Changer/logfile.log 2>&1
+`10 0 * * * ~/Documents/NASA-Wallpaper-Auto-Changer/bin/python3.9 ~/Documents/NASA-Wallpaper-Auto-Changer/main.py >> ~/Documents/NASA-Wallpaper-Auto-Changer/logfile.log 2>&1`
